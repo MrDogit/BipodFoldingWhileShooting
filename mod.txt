@@ -4,6 +4,7 @@
 	"author" : "MrDogit",
 	"contact" : "https://steamcommunity.com/id/mrdogit/",
 	"version" : "0.2",
+	"priority" : 100,
 	"blt_version" : 2,
 	"color" : "30 220 30"
 	"hooks": [
