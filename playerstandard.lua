@@ -1,5 +1,5 @@
 local _update_check_actions = PlayerStandard._update_check_actions
-function PlayerStandard:_update_check_actions(t, ...)
+function PlayerStandard:_update_check_actions(t, dt, paused)
 	local input = self:_get_input(t, dt, paused)
 
 	self:_determine_move_direction()
@@ -43,13 +43,13 @@ function PlayerStandard:_update_check_actions(t, ...)
 	new_action = new_action or self:_check_action_melee(t, input)
 	new_action = new_action or self:_check_action_reload(t, input)
 	new_action = new_action or self:_check_change_weapon(t, input)
+	new_action = new_action or self:_check_action_deploy_bipod(t, input)
 
 	if not new_action then
 		new_action = self:_check_action_primary_attack(t, input)
 		if not _G.IS_VR and not new_action then
 			self:_check_stop_shooting()
 		end
-		new_action = self:_check_action_deploy_bipod(t, input)
 	end
 
 	new_action = new_action or self:_check_action_equip(t, input)
@@ -73,5 +73,5 @@ function PlayerStandard:_update_check_actions(t, ...)
 	self:_check_action_steelsight(t, input)
 	self:_check_action_night_vision(t, input)
 	self:_find_pickups(t)
-	-- _update_check_actions(self, t, ...)
+	-- _update_check_actions(self, t, dt, paused)
 end
